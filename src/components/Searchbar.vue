@@ -1,7 +1,7 @@
 <template>
 	<v-container fluid fill-height class="green lighten-5">
-		<v-row no-gutters>
-			<v-card class="mx-auto" width="600" outlined>
+		<v-row>
+			<v-card class="mx-auto" width="60%" outlined>
 				<v-card-title>Search People</v-card-title>
 				<v-form class="d-flex flex-row mb-6">
 					<v-text-field
@@ -16,11 +16,11 @@
 		</v-row>
 
 		<v-row class="mt-28 mb-12">
-			<v-card class="mx-auto" max-width="600" outlined>
+			<v-card class="mx-auto" width="60%" outlined>
 				<v-card-title>Search Result</v-card-title>
 				<v-data-table
-					:headers="dessertHeaders"
-					:items="desserts"
+					:headers="peopleHeaders"
+					:items="people"
 					:items-per-page="5"
 					class="elevation-1"
 				>
@@ -40,100 +40,52 @@ export default {
 		return {
 			expanded: [],
 			singleExpand: false,
-			dessertHeaders: [
+			peopleHeaders: [
 				{
-					text: "Dessert (100g serving)",
+					text: "Id",
 					align: "start",
-					sortable: false,
-					value: "name",
+					value: "id",
 				},
-				{ text: "Calories", value: "calories" },
-				{ text: "Fat (g)", value: "fat" },
-				{ text: "Carbs (g)", value: "carbs" },
-				{ text: "Protein (g)", value: "protein" },
-				{ text: "Iron (%)", value: "iron" },
+
+				{ text: "Firstname", value: "first_name" },
+				{ text: "Lastname", value: "last_name" },
+				{ text: "Email", value: "email" },
+				{ text: "Gender", value: "gender" },
+				{ text: "Phone", value: "phone" },
+				{ text: "Language", value: "language" },
+				{ text: "City", value: "city" },
 				{ text: "", value: "data-table-expand" },
 			],
-			desserts: [
+			people: [
 				{
-					name: "Frozen Yogurt",
-					calories: 159,
-					fat: 6.0,
-					carbs: 24,
-					protein: 4.0,
-					iron: "1%",
+					id: 1,
+					first_name: "Barb",
+					last_name: "Glewe",
+					email: "bglewe0@netscape.com",
+					gender: "Male",
+					phone: "714-483-7786",
+					language: "Tajik",
+					city: "Sui’an",
 				},
 				{
-					name: "Ice cream sandwich",
-					calories: 237,
-					fat: 9.0,
-					carbs: 37,
-					protein: 4.3,
-					iron: "1%",
+					id: 2,
+					first_name: "Harley",
+					last_name: "Caistor",
+					email: "hcaistor1@diigo.com",
+					gender: "Male",
+					phone: "440-572-0554",
+					language: "Thai",
+					city: "Piedrancha",
 				},
 				{
-					name: "Eclair",
-					calories: 262,
-					fat: 16.0,
-					carbs: 23,
-					protein: 6.0,
-					iron: "7%",
-				},
-				{
-					name: "Cupcake",
-					calories: 305,
-					fat: 3.7,
-					carbs: 67,
-					protein: 4.3,
-					iron: "8%",
-				},
-				{
-					name: "Gingerbread",
-					calories: 356,
-					fat: 16.0,
-					carbs: 49,
-					protein: 3.9,
-					iron: "16%",
-				},
-				{
-					name: "Jelly bean",
-					calories: 375,
-					fat: 0.0,
-					carbs: 94,
-					protein: 0.0,
-					iron: "0%",
-				},
-				{
-					name: "Lollipop",
-					calories: 392,
-					fat: 0.2,
-					carbs: 98,
-					protein: 0,
-					iron: "2%",
-				},
-				{
-					name: "Honeycomb",
-					calories: 408,
-					fat: 3.2,
-					carbs: 87,
-					protein: 6.5,
-					iron: "45%",
-				},
-				{
-					name: "Donut",
-					calories: 452,
-					fat: 25.0,
-					carbs: 51,
-					protein: 4.9,
-					iron: "22%",
-				},
-				{
-					name: "KitKat",
-					calories: 518,
-					fat: 26.0,
-					carbs: 65,
-					protein: 7,
-					iron: "6%",
+					id: 3,
+					first_name: "Dunn",
+					last_name: "Barsam",
+					email: "dbarsam2@unicef.org",
+					gender: "Male",
+					phone: "441-362-5147",
+					language: "Moldovan",
+					city: "Topol’noye",
 				},
 			],
 		};
