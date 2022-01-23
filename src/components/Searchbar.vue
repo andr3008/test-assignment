@@ -10,7 +10,7 @@
 						label="Filter text"
 					></v-text-field>
 
-					<v-btn class="mx-8 mt-2 grey--text">Search</v-btn>
+					<v-btn class="mx-8 mt-2 grey--text" @click="search">Search</v-btn>
 				</v-form>
 			</v-card>
 		</v-row>
@@ -76,6 +76,22 @@ export default {
 		closePopup() {
 			this.dialog = false;
 		},
+		search() {
+			fetch("/db.json")
+				.then(async (response) => {
+					const data = await response.json();
+					if (!response.ok) {
+						const error = (data && data.message) || response.statusText;
+						return Promise.reject(error);
+					}
+
+					this.people = data.people;
+				})
+				.catch((error) => {
+					this.errorMessage = error;
+					console.error("There was an error!", error);
+				});
+		},
 	},
 
 	data() {
@@ -99,38 +115,7 @@ export default {
 				{ text: "City", value: "city" },
 				{ text: "", value: "data-table-expand" },
 			],
-			people: [
-				{
-					id: 1,
-					first_name: "Barb",
-					last_name: "Glewe",
-					email: "bglewe0@netscape.com",
-					gender: "Male",
-					phone: "714-483-7786",
-					language: "Tajik",
-					city: "Sui’an",
-				},
-				{
-					id: 2,
-					first_name: "Harley",
-					last_name: "Caistor",
-					email: "hcaistor1@diigo.com",
-					gender: "Male",
-					phone: "440-572-0554",
-					language: "Thai",
-					city: "Piedrancha",
-				},
-				{
-					id: 3,
-					first_name: "Dunn",
-					last_name: "Barsam",
-					email: "dbarsam2@unicef.org",
-					gender: "Male",
-					phone: "441-362-5147",
-					language: "Moldovan",
-					city: "Topol’noye",
-				},
-			],
+			people: [],
 		};
 	},
 };
