@@ -1,7 +1,7 @@
 <template>
 	<v-container fluid fill-height class="green lighten-5">
 		<v-row>
-			<v-card class="mx-auto" width="60%" outlined>
+			<v-card class="mx-auto" width="80%" outlined>
 				<v-card-title>Search People</v-card-title>
 				<v-form class="d-flex flex-row mb-6">
 					<v-text-field
@@ -16,14 +16,24 @@
 		</v-row>
 
 		<v-row class="mt-28 mb-12">
-			<v-card class="mx-auto" width="60%" outlined>
+			<v-card class="mx-auto" width="80%" outlined>
 				<v-card-title>Search Result</v-card-title>
+
 				<v-data-table
 					:headers="peopleHeaders"
 					:items="people"
+					:expanded.sync="expanded"
 					:items-per-page="5"
+					item-key="id"
+					show-expand
 					class="elevation-1"
+					@click:row="clickRow"
 				>
+					<template v-slot:expanded-item="{ headers, item }">
+						<td class="pt-4 mb-3" :colspan="headers.length">
+							<PersonDetails v-bind:person="item" v-bind:editable="false" />
+						</td>
+					</template>
 				</v-data-table>
 			</v-card>
 		</v-row>
@@ -31,10 +41,11 @@
 </template>
 
 <script>
-export default {
-	name: "Searchbar",
+import PersonDetails from "./PersonDetails";
 
-	methods: {},
+export default {
+	components: { PersonDetails },
+	name: "Searchbar",
 
 	data() {
 		return {
@@ -46,7 +57,6 @@ export default {
 					align: "start",
 					value: "id",
 				},
-
 				{ text: "Firstname", value: "first_name" },
 				{ text: "Lastname", value: "last_name" },
 				{ text: "Email", value: "email" },
