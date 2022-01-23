@@ -27,19 +27,40 @@
 					item-key="id"
 					show-expand
 					class="elevation-1"
-					@click:row="clickRow"
+					@click:row="openPopup"
 				>
 					<template v-slot:expanded-item="{ headers, item }">
 						<td class="pt-4 mb-3" :colspan="headers.length">
-							<PersonDetails v-bind:person="item" v-bind:editable="false" />
+							<PersonDetails
+								name="readonlyDetails"
+								v-bind:person="item"
+								v-bind:editable="false"
+							/>
 						</td>
 					</template>
 				</v-data-table>
 			</v-card>
 		</v-row>
+		<v-layout>
+			<v-dialog v-model="dialog" persistent width="60%">
+				<v-card>
+					<v-card-title class="headline">Person Info</v-card-title>
+					<td class="px-8 mb-3">
+						<PersonDetails
+							name="editableDetails"
+							v-bind:person="selectedPerson"
+							v-bind:editable="true"
+						/>
+					</td>
+					<v-card-actions>
+						<v-spacer></v-spacer>
+						<v-btn @click.native="closePopup">Close</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-dialog>
+		</v-layout>
 	</v-container>
 </template>
-
 <script>
 import PersonDetails from "./PersonDetails";
 
@@ -47,10 +68,22 @@ export default {
 	components: { PersonDetails },
 	name: "Searchbar",
 
+	methods: {
+		openPopup(row) {
+			this.selectedPerson = row;
+			this.dialog = true;
+		},
+		closePopup() {
+			this.dialog = false;
+		},
+	},
+
 	data() {
 		return {
 			expanded: [],
 			singleExpand: false,
+			dialog: false,
+			selectedPerson: {},
 			peopleHeaders: [
 				{
 					text: "Id",
