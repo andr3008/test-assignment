@@ -1,7 +1,7 @@
 <template>
-	<v-container fluid fill-height class="green lighten-5">
-		<v-row>
-			<v-card class="mx-auto" width="80%" outlined>
+	<v-container fluid>
+		<v-row class="mx-auto">
+			<v-card class="mx-auto mt-6" width="80%" outlined>
 				<v-card-title>Search People</v-card-title>
 				<v-form class="d-flex flex-row mb-6">
 					<v-text-field
@@ -10,13 +10,12 @@
 						color="grey"
 						label="Filter text"
 					></v-text-field>
-
 					<v-btn class="mx-8 mt-2 grey--text" @click="search">Search</v-btn>
 				</v-form>
 			</v-card>
 		</v-row>
 
-		<v-row class="mt-28 mb-12">
+		<v-row class="mt-12 mx-auto">
 			<v-card class="mx-auto" width="80%" outlined>
 				<v-card-title>Search Result</v-card-title>
 
@@ -78,7 +77,7 @@ export default {
 			this.dialog = false;
 		},
 		search() {
-			fetch("/db.json")
+			fetch("db.json")
 				.then(async (response) => {
 					const data = await response.json();
 					if (!response.ok) {
