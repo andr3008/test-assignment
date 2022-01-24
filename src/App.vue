@@ -1,19 +1,19 @@
 <template>
 	<v-app>
 		<v-main>
-			<Searchbar />
+			<SearchPage />
 		</v-main>
 	</v-app>
 </template>
 
 <script>
-import Searchbar from "./components/Searchbar";
+import SearchPage from "./components/SearchPage";
 
 export default {
 	name: "App",
 
 	components: {
-		Searchbar,
+		SearchPage,
 	},
 };
 </script>

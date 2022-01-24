@@ -5,6 +5,7 @@
 				<v-card-title>Search People</v-card-title>
 				<v-form class="d-flex flex-row mb-6">
 					<v-text-field
+						v-model="filterText"
 						class="ml-8"
 						color="grey"
 						label="Filter text"
@@ -66,7 +67,7 @@ import PersonDetails from "./PersonDetails";
 
 export default {
 	components: { PersonDetails },
-	name: "Searchbar",
+	name: "SearchPage",
 
 	methods: {
 		openPopup(row) {
@@ -85,7 +86,19 @@ export default {
 						return Promise.reject(error);
 					}
 
-					this.people = data.people;
+					if (this.filterText.length > 1) {
+						this.people = data.people.filter((person) => {
+							var personStr = "";
+							Object.values(person).forEach(function (value) {
+								personStr += value;
+							});
+							return personStr
+								.toLowerCase()
+								.includes(this.filterText.toLowerCase());
+						});
+					} else {
+						this.people = data.people;
+					}
 				})
 				.catch((error) => {
 					this.errorMessage = error;
@@ -100,6 +113,7 @@ export default {
 			singleExpand: false,
 			dialog: false,
 			selectedPerson: {},
+			filterText: "",
 			peopleHeaders: [
 				{
 					text: "Id",
