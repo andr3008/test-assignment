@@ -12,7 +12,7 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:andr3008/test-assignment.git main
+git push -f git@github.com:andr3008/test-assignment.git main:gh-pages
 
 
 
