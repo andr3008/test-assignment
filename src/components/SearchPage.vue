@@ -87,19 +87,14 @@ export default {
 
 					if (this.filterText.length > 1) {
 						this.people = data.people.filter((person) => {
-							var matches = false;
-
 							for (const value of Object.values(person)) {
-								var valueStr;
-								if (typeof str !== "string") {
-									valueStr = value.toString();
-								}
-								matches = valueStr
+								var matches = value
+									.toString()
 									.toLowerCase()
 									.includes(this.filterText.toLowerCase());
-								if (matches) break;
+								if (matches) return true;
 							}
-							return matches;
+							return false;
 						});
 					} else {
 						this.people = data.people;
